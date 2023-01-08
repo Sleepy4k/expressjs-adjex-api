@@ -1,11 +1,11 @@
-var fs = require('fs');
-var path = require('path');
+var fs = require("fs");
+var path = require("path");
 
 // Get Config File
-var { system } = require('../../../config/path');
+var { system } = require("../../../config/path");
 
 // Validate database
-var database = require('./database');
+var database = require("./database");
 
 // Database Location
 var dbPath = path.join(__dirname, `../../../${system.database}`);
@@ -22,17 +22,17 @@ module.exports = {
         var path = `${dbPath}/${file}.json`;
 
         try {
-            if (database.get() == 'file') {
+            if (database.get() == "file") {
                 fs.statSync(path);
             }
 
-            console.log('SERVER database file exist - - ms - -');
+            console.log("SERVER database file exist - - ms - -");
 
             return true;
         } catch (error) {
-            if (database.get() == 'file') {
-                fs.closeSync(fs.openSync(path, 'w'));
-                fs.writeFileSync(path, '[]');
+            if (database.get() == "file") {
+                fs.closeSync(fs.openSync(path, "w"));
+                fs.writeFileSync(path, "[]");
             }
 
             console.log(`SERVER ${error.message} - - ms - -`);
@@ -52,7 +52,7 @@ module.exports = {
         var path = `${dbPath}/${file}.json`;
 
         try {
-            if (database.get() == 'file') {
+            if (database.get() == "file") {
                 var dataBuffer = fs.readFileSync(path);
                 var dataString = dataBuffer.toString();
 
@@ -75,7 +75,7 @@ module.exports = {
         var path = `${dbPath}/${file}.json`;
 
         try {
-            if (database.get() == 'file') {
+            if (database.get() == "file") {
                 var dataString = JSON.stringify(body);
                 var dataSaved = fs.writeFileSync(path, dataString);
 

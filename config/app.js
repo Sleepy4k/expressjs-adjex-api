@@ -1,4 +1,4 @@
-require('dotenv/config');
+require("dotenv/config");
 
 module.exports = {
     /*
@@ -12,7 +12,7 @@ module.exports = {
     |
     */
 
-    name: process.env.APP_NAME || 'Benjamin4k',
+    name: process.env.APP_NAME || "Benjamin4k",
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ module.exports = {
     |
     */
 
-    port: process.env.APP_PORT || '3000',
+    port: process.env.APP_PORT || "3000",
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ module.exports = {
     |
     */
 
-    env: process.env.APP_ENV || 'production',
+    env: process.env.APP_ENV || "production",
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ module.exports = {
     |
     */
 
-    url: process.env.APP_URL || 'http://localhost',
+    url: process.env.APP_URL || "http://localhost",
 
     /*
     |--------------------------------------------------------------------------
@@ -77,5 +77,5 @@ module.exports = {
     |
     */
 
-    locale: process.env.APP_LOCALE || 'en',
+    locale: process.env.APP_LOCALE || "en",
 };

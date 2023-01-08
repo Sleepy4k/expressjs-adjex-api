@@ -9,12 +9,12 @@ module.exports = {
      * @return Array
      */
     success: function (permintaan, respon, params, code) {
-        console.log('SERVER create success response api - - ms - -');
+        console.log("SERVER create success response api - - ms - -");
 
         respon.status(code || 200);
 
         respon.json({
-            status: 'success',
+            status: "success",
             message: params.message,
             meta: {
                 hostname: permintaan.hostname,
@@ -35,12 +35,12 @@ module.exports = {
      * @return Array
      */
     error: function (permintaan, respon, params, code) {
-        console.log('SERVER create error response api - - ms - -');
+        console.log("SERVER create error response api - - ms - -");
 
         respon.status(code || 500);
 
         respon.json({
-            status: 'error',
+            status: "error",
             message: params.message,
             error: params.error,
             meta: {

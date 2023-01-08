@@ -1,7 +1,7 @@
 // Get Config File
-var directory = require('../../config/path');
-var database = require('../../config/database');
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+var directory = require("../../config/path");
+const fetch = (...args) =>
+    import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 // Traits
 var responseData = require(`../${directory.trait}/responseData`);
@@ -10,9 +10,9 @@ const random_api = `https://random-word-form.herokuapp.com/random/adjective`;
 const word_api = `https://api.dictionaryapi.dev/api/v2/entries/en`;
 
 const options = {
-    method: 'GET',
+    method: "GET",
     headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
     },
 };
 
@@ -28,11 +28,20 @@ module.exports = {
      */
     index: async (permintaan, respon) => {
         try {
-            var url_string = permintaan.protocol + '://' + permintaan.get('host') + permintaan.originalUrl;
+            var url_string =
+                permintaan.protocol +
+                "://" +
+                permintaan.get("host") +
+                permintaan.originalUrl;
             var url = new URL(url_string);
-            var c = url.searchParams.get('filter');
+            var c = url.searchParams.get("filter");
 
-            fetch(c != null ? random_api + '/' + c + '?count=25' : random_api + '?count=25', options)
+            fetch(
+                c != null
+                    ? random_api + "/" + c + "?count=25"
+                    : random_api + "?count=25",
+                options
+            )
                 .then((res) => res.json())
                 .then((json) => {
                     console.log(json);
@@ -41,7 +50,11 @@ module.exports = {
                         data: json,
                     });
                 })
-                .catch((err) => console.error(`SERVER error to get data from api|${err} - - ms - - `));
+                .catch((err) =>
+                    console.error(
+                        `SERVER error to get data from api|${err} - - ms - - `
+                    )
+                );
         } catch (error) {
             return responseData.error(
                 permintaan,
@@ -72,7 +85,7 @@ module.exports = {
                     var respon_data = [];
 
                     json[0].meanings.forEach((object) => {
-                        if (object.partOfSpeech == 'adjective') {
+                        if (object.partOfSpeech == "adjective") {
                             object.definitions.forEach((element) => {
                                 if (element.example != undefined) {
                                     respon_data.push({
@@ -82,7 +95,7 @@ module.exports = {
                                 } else {
                                     respon_data.push({
                                         definition: element.definition,
-                                        example: 'No example',
+                                        example: "No example",
                                     });
                                 }
                             });
@@ -96,7 +109,11 @@ module.exports = {
                         },
                     });
                 })
-                .catch((err) => console.error(`SERVER error to get data from api|${err} - - ms - - `));
+                .catch((err) =>
+                    console.error(
+                        `SERVER error to get data from api|${err} - - ms - - `
+                    )
+                );
         } catch (error) {
             return responseData.error(
                 permintaan,
