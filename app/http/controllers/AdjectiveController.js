@@ -1,5 +1,5 @@
 // Get Config File
-var directory = require('../../../config/path');
+var directory = require("../../../config/path");
 
 // Traits
 var responseData = require(`../../${directory.trait}/responseData`);
@@ -15,7 +15,7 @@ function catchError(permintaan, respon, error) {
         permintaan,
         respon,
         {
-            message: 'system error',
+            message: "system error",
             error: error.message,
         },
         500

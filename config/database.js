@@ -1,4 +1,4 @@
-require('dotenv/config')
+require("dotenv/config");
 
 module.exports = {
     /*
@@ -12,7 +12,7 @@ module.exports = {
     |
     */
 
-    default: process.env.DB_CONNECTION || 'file',
+    default: process.env.DB_CONNECTION || "file",
 
     /*
     |--------------------------------------------------------------------------
@@ -31,14 +31,14 @@ module.exports = {
     */
 
     connections: [
-        file = {
-            driver: 'file'
-        },
-        mongoose = {
-            driver: 'mongoose',
-            host: process.env.DB_HOST || 'localhost',
-            port: process.env.DB_PORT || '27017',
-            database: process.env.DB_DATABASE || 'note'
-        }
-    ]
+        (file = {
+            driver: "file",
+        }),
+        (mongoose = {
+            driver: "mongoose",
+            host: process.env.DB_HOST || "localhost",
+            port: process.env.DB_PORT || "27017",
+            database: process.env.DB_DATABASE || "note",
+        }),
+    ],
 };

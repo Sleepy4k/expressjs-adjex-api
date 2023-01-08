@@ -1,6 +1,5 @@
 // Get Config File
-var { system } = require('../../../config/path');
-var config = require('../../../config/database');
+var config = require("../../../config/database");
 
 // Validate database config
 function validate(type) {
@@ -9,13 +8,15 @@ function validate(type) {
 
         connection.forEach((element) => {
             if (element.driver == type) {
-                console.log('SERVER database connection default exist - - ms - -');
+                console.log(
+                    "SERVER database connection default exist - - ms - -"
+                );
 
                 return false;
             }
         });
     } catch (error) {
-        console.log('SERVER database default error or not exist - - ms - -');
+        console.log("SERVER database default error or not exist - - ms - -");
 
         return true;
     }

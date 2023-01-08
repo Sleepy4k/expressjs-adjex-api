@@ -1,5 +1,5 @@
-var config = require('../../config/app');
-var directory = require('../../config/path');
+var config = require("../../config/app");
+var directory = require("../../config/path");
 
 var responseData = require(`../../app/${directory.trait}/responseData`);
 

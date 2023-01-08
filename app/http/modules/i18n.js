@@ -1,15 +1,15 @@
-var router = require('express').Router();
-var { I18n } = require('i18n');
-var path = require('path');
+var router = require("express").Router();
+var { I18n } = require("i18n");
+var path = require("path");
 
 // Get Config File
-var config = require('../../../config/app');
-var directory = require('../../../config/path');
+var config = require("../../../config/app");
+var directory = require("../../../config/path");
 
 // I18N Configuration
 var i18n = new I18n({
     // setup some locales - other locales default to en silently
-    locales: ['en', 'id'],
+    locales: ["en", "id"],
 
     // you may alter a site wide default locale
     defaultLocale: config.locale,
@@ -18,7 +18,7 @@ var i18n = new I18n({
     retryInDefaultLocale: true,
 
     // sets a custom header name to read the language preference from - accept-language header by default
-    header: 'accept-language',
+    header: "accept-language",
 
     // where to store json files - defaults to './locales' relative to modules directory
     directory: path.join(__dirname, `../../../${directory.translate}`),
@@ -33,7 +33,7 @@ var i18n = new I18n({
     syncFiles: true,
 
     // setting extension of json files - defaults to '.json' (you might want to set this to '.js' according to webtranslateit)
-    extension: '.json',
+    extension: ".json",
 
     // use tree system of json files - defaults to false
     objectNotation: true,
@@ -55,7 +55,9 @@ var i18n = new I18n({
 
     // used to alter the behaviour of missing keys
     missingKeyFn: function (locale, value) {
-        console.log(`SERVER missing translate key ${value}, in locale ${locale} - - ms - -`);
+        console.log(
+            `SERVER missing translate key ${value}, in locale ${locale} - - ms - -`
+        );
 
         return value;
     },
@@ -65,7 +67,9 @@ var i18n = new I18n({
 router.use((permintaan, respon, next) => {
     i18n.init(permintaan, respon);
 
-    console.log(`SERVER get translate data from ${i18n.getLocale()} locale - - ms - -`);
+    console.log(
+        `SERVER get translate data from ${i18n.getLocale()} locale - - ms - -`
+    );
 
     next();
 });
