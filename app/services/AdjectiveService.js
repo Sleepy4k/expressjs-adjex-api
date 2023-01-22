@@ -6,15 +6,8 @@ const fetch = (...args) =>
 // Traits
 var responseData = require(`../${directory.trait}/responseData`);
 
-const random_api = `https://random-word-form.herokuapp.com/random/adjective`;
-const word_api = `https://api.dictionaryapi.dev/api/v2/entries/en`;
-
-const options = {
-    method: "GET",
-    headers: {
-        "Content-Type": "application/json",
-    },
-};
+// Models
+const Adjective = require(`../${directory.models}/Adjective`);
 
 // Main Module CRUD
 module.exports = {
@@ -34,27 +27,33 @@ module.exports = {
                 permintaan.get("host") +
                 permintaan.originalUrl;
             var url = new URL(url_string);
-            var c = url.searchParams.get("filter");
+            var count = url.searchParams.get("count");
+            var filter = url.searchParams.get("filter");
 
-            fetch(
-                c != null
-                    ? random_api + "/" + c + "?count=25"
-                    : random_api + "?count=25",
-                options
-            )
-                .then((res) => res.json())
-                .then((json) => {
-                    console.log(json);
+            console.log(count);
+            console.log(filter);
 
+            Adjective.getAll(count, filter, (err, data) => {
+                if (err) {
+                    return responseData.error(
+                        permintaan,
+                        respon,
+                        {
+                            success: false,
+                            message:
+                                "Some error occurred while retrieving users.",
+                            error: err.message,
+                        },
+                        500
+                    );
+                } else {
                     return responseData.success(permintaan, respon, {
-                        data: json,
+                        success: true,
+                        message: "Berhasil ambil data!",
+                        data: data,
                     });
-                })
-                .catch((err) =>
-                    console.error(
-                        `SERVER error to get data from api|${err} - - ms - - `
-                    )
-                );
+                }
+            });
         } catch (error) {
             return responseData.error(
                 permintaan,
@@ -79,41 +78,27 @@ module.exports = {
         var letter = permintaan.params.letter;
 
         try {
-            fetch(word_api + `/${letter}`, options)
-                .then((res) => res.json())
-                .then((json) => {
-                    var respon_data = [];
-
-                    json[0].meanings.forEach((object) => {
-                        if (object.partOfSpeech == "adjective") {
-                            object.definitions.forEach((element) => {
-                                if (element.example != undefined) {
-                                    respon_data.push({
-                                        definition: element.definition,
-                                        example: element.example,
-                                    });
-                                } else {
-                                    respon_data.push({
-                                        definition: element.definition,
-                                        example: "No example",
-                                    });
-                                }
-                            });
-                        }
-                    });
-
-                    return responseData.success(permintaan, respon, {
-                        data: {
-                            word: json[0].word,
-                            data: respon_data,
+            Adjective.findById(letter, (err, data) => {
+                if (err) {
+                    return responseData.error(
+                        permintaan,
+                        respon,
+                        {
+                            success: false,
+                            message:
+                                "Some error occurred while retrieving users.",
+                            error: err.message,
                         },
+                        500
+                    );
+                } else {
+                    return responseData.success(permintaan, respon, {
+                        success: true,
+                        message: "Berhasil ambil data!",
+                        data: data,
                     });
-                })
-                .catch((err) =>
-                    console.error(
-                        `SERVER error to get data from api|${err} - - ms - - `
-                    )
-                );
+                }
+            });
         } catch (error) {
             return responseData.error(
                 permintaan,
