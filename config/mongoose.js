@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 
 // Get Config File
-var path = require("./path");
 var database = require("./database");
 
 // Main logic
