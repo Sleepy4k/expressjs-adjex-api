@@ -1,7 +1,15 @@
-const db = require("../database/models");
+const db = require("../models");
 const { quiz } = db;
 
-// POST /jobsheets/one
+/**
+ * Submit an answer to a question.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
 exports.one = (req, res, next) => {
   const { quizId, answer } = req.body;
 
@@ -31,7 +39,15 @@ exports.one = (req, res, next) => {
     });
 };
 
-// POST /jobsheets/many
+/**
+ * Send answers to many questions.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
 exports.many = (req, res, next) => {
   const { quizId, answer } = req.body;
 

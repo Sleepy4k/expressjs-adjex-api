@@ -1,7 +1,15 @@
-const db = require("../database/models");
-const { quiz, category, level } = db;
+const db = require("../models");
+const { quiz } = db;
 
-// GET /quizzes
+/**
+ * Display a listing of the resource.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
 exports.index = (req, res, next) => {
   quiz
     .findAll()
@@ -21,12 +29,20 @@ exports.index = (req, res, next) => {
     });
 };
 
-// POST /quizzes/store
+/**
+ * Store a newly created resource in storage.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
 exports.store = (req, res, next) => {
-  const { question, answer } = req.body;
+  const { question, a, b, c, d, answer, categoryId, levelId } = req.body;
 
   quiz
-    .create({ question, answer })
+    .create({ question, a, b, c, d, answer, categoryId, levelId })
     .then((quiz) => {
       res.status(201).json({
         status: "success",
