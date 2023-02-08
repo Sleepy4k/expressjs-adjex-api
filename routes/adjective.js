@@ -1,10 +1,10 @@
-const Router = require("express").Router();
-const adjectiveController = require("../controllers/adjective");
+const router = require("express").Router();
+const adjectiveController = require("../controllers/adjective.controller");
 
 /* GET adjective listing. */
-Router.get("/adjective", adjectiveController.index);
+router.get("/", adjectiveController.index);
 
 /* GET spesific adjective listing. */
-Router.get("/adjective/:letter", adjectiveController.show);
+router.get("/:letter", adjectiveController.show);
 
-module.exports = Router;
+module.exports = router;

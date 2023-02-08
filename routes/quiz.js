@@ -1,25 +1,25 @@
-const Router = require("express").Router();
-const QuizController = require("../controllers/quiz");
+const router = require("express").Router();
+const quizController = require("../controllers/quiz.controller");
 
 /* GET quiz listing. */
-Router.get("/", QuizController.index);
+router.get("/", quizController.index);
 
 /* POST quiz listing. */
-Router.post("/store", QuizController.store);
+router.post("/store", quizController.store);
 
 /* GET spesific quiz listing. */
-Router.get("/:id", QuizController.show);
+router.get("/:id", quizController.show);
 
 /* PUT spesific quiz listing. */
-Router.put("/:id", QuizController.update);
+router.put("/:id", quizController.update);
 
 /* DELETE spesific quiz listing. */
-Router.delete("/:id", QuizController.destroy);
+router.delete("/:id", quizController.destroy);
 
 /* GET quiz by spesific category listing. */
-Router.get("/category/:id", QuizController.categoryId);
+router.get("/category/:id", quizController.categoryId);
 
 /* GET quiz by spesific level listing. */
-Router.get("/level/:id", QuizController.levelId);
+router.get("/level/:id", quizController.levelId);
 
-module.exports = Router;
+module.exports = router;
