@@ -1,12 +1,13 @@
 const createError = require("http-errors");
 const express = require("express");
+const session = require("express-session");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-
-const indexRouter = require("./routes/index");
-
 const app = express();
+
+const models = require("./models");
+const indexRouter = require("./routes/index");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -14,9 +15,22 @@ app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+models.sequelize
+  .authenticate()
+  .then(() => console.log("Connection has been established successfully."))
+  .catch((err) => console.error("Unable to connect to the database:", err));
 
 app.use("/", indexRouter);
 
