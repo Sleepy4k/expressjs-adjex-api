@@ -1,8 +1,11 @@
 require("dotenv").config();
 
+const fs = require("fs");
+const path = require("path");
 const Sequelize = require("sequelize");
-const env = require("../config/app").env;
-const { development, test, production } = require("../config/database");
+const env = require("../config/app.config").env;
+const basename = path.basename(__filename);
+const { development, test, production } = require("../config/database.config");
 
 const connection =
   env === "development" ? development : env === "test" ? test : production;
@@ -26,20 +29,24 @@ const sequelize = new Sequelize(
 
 const db = {};
 
+fs.readdirSync(__dirname)
+  .filter((file) => {
+    return (
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+    );
+  })
+  .forEach((file) => {
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize);
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
-// Models/tables
-db.user = require("./user.model")(sequelize, Sequelize);
-db.quiz = require("./quiz.model")(sequelize, Sequelize);
-db.level = require("./level.model")(sequelize, Sequelize);
-db.category = require("./category.model")(sequelize, Sequelize);
-db.adjective = require("./adjective.model")(sequelize, Sequelize);
-
-// Relations
-db.quiz.belongsTo(db.category, { foreignKey: "categoryId" });
-db.quiz.belongsTo(db.level, { foreignKey: "levelId" });
-db.category.hasMany(db.quiz, { foreignKey: "categoryId" });
-db.level.hasMany(db.quiz, { foreignKey: "levelId" });
 
 module.exports = db;

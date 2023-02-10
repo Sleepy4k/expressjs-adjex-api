@@ -1,5 +1,7 @@
-const db = require("../models");
-const { quiz } = db;
+/**
+ * Module dependencies.
+ */
+const models = require("../models");
 
 /**
  * Submit an answer to a question.
@@ -10,33 +12,41 @@ const { quiz } = db;
  *
  * @return Array
  */
-exports.one = (req, res, next) => {
+exports.one = async (req, res, next) => {
   const { quizId, answer } = req.body;
 
-  quiz
-    .findOne({ where: { id: quizId } })
-    .then((quiz) => {
-      if (quiz.answer === answer) {
-        res.status(200).json({
-          status: "success",
-          message: "Answer is correct",
-          data: quiz || {},
+  try {
+    await models.quiz
+      .findOne({ where: { id: quizId } })
+      .then((quiz) => {
+        if (quiz.answer === answer) {
+          res.status(200).json({
+            status: "success",
+            message: "Answer is correct",
+            data: quiz || {},
+          });
+        } else {
+          res.status(200).json({
+            status: "success",
+            message: "Answer is incorrect",
+            data: quiz || {},
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          status: "error",
+          message: "Internal server error",
+          data: error.message || {},
         });
-      } else {
-        res.status(200).json({
-          status: "success",
-          message: "Answer is incorrect",
-          data: quiz || {},
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        status: "error",
-        message: "Internal server error",
-        data: error || {},
       });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
     });
+  }
 };
 
 /**
@@ -48,7 +58,7 @@ exports.one = (req, res, next) => {
  *
  * @return Array
  */
-exports.many = (req, res, next) => {
+exports.many = async (req, res, next) => {
   const { quizId, answer } = req.body;
 
   try {
@@ -56,11 +66,10 @@ exports.many = (req, res, next) => {
     let incorrect = 0;
 
     for (let i = 0; i < quizId.length; i++) {
-      quiz
+      await models.quiz
         .findOne({
           limit: 1,
           where: { id: quizId[i] },
-          order: [["id", "DESC"]],
         })
         .then((quiz) => {
           if (quiz.answer === answer[i]) {
@@ -73,21 +82,22 @@ exports.many = (req, res, next) => {
           res.status(500).json({
             status: "error",
             message: "Internal server error",
-            data: error || {},
+            data: error.message || {},
           });
         });
     }
 
     res.status(200).json({
       status: "success",
-      message: "Answer is correct",
+      message:
+        correct > incorrect ? "Answer is correct" : "Answer is incorrect",
       data: { correct, incorrect },
     });
   } catch (error) {
     res.status(500).json({
       status: "error",
       message: "Internal server error",
-      data: error || {},
+      data: error.message || {},
     });
   }
 };

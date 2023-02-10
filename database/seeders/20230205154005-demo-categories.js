@@ -1,14 +1,14 @@
 "use strict";
 
-const faker = require("../factories/20230208010200-seed-levels");
+const factories = require("../factories/20230208010248-seed-categories");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("categories", faker.up, {});
+    await queryInterface.bulkInsert("categories", factories.up(), {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("categories", faker.down, {});
+    await queryInterface.bulkDelete("categories", factories.down(), {});
   },
 };

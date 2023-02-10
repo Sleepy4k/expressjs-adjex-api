@@ -42,6 +42,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      adjectiveId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: true,
         type: Sequelize.DATE,

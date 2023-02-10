@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Level.hasMany(models.quiz, {
+        foreignKey: "levelId",
+        as: "quizzes",
+      });
     }
   }
   Level.init(
@@ -22,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Level",
+      modelName: "level",
       tableName: "levels",
     }
   );

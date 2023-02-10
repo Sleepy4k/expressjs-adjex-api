@@ -4,12 +4,14 @@ const { faker } = require("@faker-js/faker");
 
 module.exports = {
   up() {
-    const levels = [...Array(3)].map((_) => ({
+    const categories = [...Array(3)].map((_) => ({
       name: faker.name.firstName(),
+      description: faker.lorem.paragraph(),
+      example: faker.lorem.paragraph(),
       createdAt: new Date(),
       updatedAt: new Date(),
     }));
-    return levels;
+    return categories;
   },
 
   down() {

@@ -1,10 +1,13 @@
 const router = require("express").Router();
-const name = require("../config/app").name;
+const name = require("../config/app.config").name;
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("index", { title: name });
 });
+
+/* RESOURCE quiz. */
+router.use("/api/auth", require("./auth"));
 
 /* RESOURCE quiz. */
 router.use("/api/quiz", require("./quiz"));

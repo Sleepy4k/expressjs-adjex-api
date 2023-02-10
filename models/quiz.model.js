@@ -10,7 +10,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Quiz.belongsTo(models.category, {
+        foreignKey: "categoryId",
+        as: "category",
+      });
+      Quiz.belongsTo(models.level, {
+        foreignKey: "levelId",
+        as: "level",
+      });
+      Quiz.belongsTo(models.adjective, {
+        foreignKey: "adjectiveId",
+        as: "adjective",
+      });
     }
   }
   Quiz.init(
@@ -51,10 +62,18 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
+      adjectiveId: {
+        type: DataTypes.INTEGER,
+        validate: { notEmpty: { msg: "Adjective must not be empty" } },
+        references: {
+          model: "adjectives",
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
-      modelName: "Quiz",
+      modelName: "quiz",
       tableName: "quizzes",
     }
   );
