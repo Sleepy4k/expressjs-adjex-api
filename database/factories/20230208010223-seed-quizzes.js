@@ -1,26 +1,26 @@
 "use strict";
 
-const faker = require("faker");
+const { faker } = require("@faker-js/faker");
 
-/** @type {import('faker')} */
 module.exports = {
-  async up() {
+  up() {
     const quizzes = [...Array(3)].map((_) => ({
-      question: faker.name.findName(),
-      a: faker.name.findName(),
-      b: faker.name.findName(),
-      c: faker.name.findName(),
-      d: faker.name.findName(),
+      question: faker.random.words(5) + "?",
+      a: faker.random.word(),
+      b: faker.random.word(),
+      c: faker.random.word(),
+      d: faker.random.word(),
       answer: "a",
       categoryId: Math.floor(Math.random() * (3 - 1 + 1)) + 1,
       levelId: Math.floor(Math.random() * (3 - 1 + 1)) + 1,
+      adjectiveId: Math.floor(Math.random() * (3 - 1 + 1)) + 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     }));
     return quizzes;
   },
 
-  async down() {
+  down() {
     return null;
   },
 };

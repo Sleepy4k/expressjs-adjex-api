@@ -1,19 +1,18 @@
 "use strict";
 
-const faker = require("faker");
+const { faker } = require("@faker-js/faker");
 
-/** @type {import('faker')} */
 module.exports = {
-  async up() {
+  up() {
     const categories = [...Array(3)].map((_) => ({
-      name: faker.name.findName(),
+      name: faker.name.firstName(),
       createdAt: new Date(),
       updatedAt: new Date(),
     }));
     return categories;
   },
 
-  async down() {
+  down() {
     return null;
   },
 };
