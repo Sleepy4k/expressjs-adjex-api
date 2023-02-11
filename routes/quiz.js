@@ -1,3 +1,4 @@
+const { jwt } = require("../middleware");
 const router = require("express").Router();
 const quizController = require("../controllers/quiz.controller");
 
@@ -5,16 +6,16 @@ const quizController = require("../controllers/quiz.controller");
 router.get("/", quizController.index);
 
 /* POST quiz listing. */
-router.post("/", quizController.store);
+router.post("/", jwt.verifyToken, quizController.store);
 
 /* GET spesific quiz listing. */
 router.get("/:id", quizController.show);
 
 /* PUT spesific quiz listing. */
-router.put("/:id", quizController.update);
+router.put("/:id", jwt.verifyToken, quizController.update);
 
 /* DELETE spesific quiz listing. */
-router.delete("/:id", quizController.destroy);
+router.delete("/:id", jwt.verifyToken, quizController.destroy);
 
 /* GET quiz by spesific category listing. */
 router.get("/category/:id", quizController.categoryId);
