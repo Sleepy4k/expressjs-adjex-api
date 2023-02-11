@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { register } = require("../middleware");
 const authController = require("../controllers/auth.controller");
 
 /* POST login listing. */
