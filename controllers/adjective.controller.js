@@ -16,10 +16,10 @@ const url = require("../config/app.config").url;
 exports.index = async (req, res, next) => {
   var urlString = url + req.originalUrl;
   var fixUrl = new URL(urlString);
-  var count = fixUrl.searchParams.get("count");
+  var count = fixUrl.searchParams.get("count") || 25;
 
   await models.adjective
-    .findAll({ limit: count || 25 })
+    .findAll({ offset: 0, limit: Number(count) })
     .then((adjectives) => {
       res.status(202).json({
         status: "success",
@@ -49,7 +49,7 @@ exports.show = async (req, res, next) => {
   var letter = req.params.letter;
 
   await models.adjective
-    .findAll({ where: { letter: letter } })
+    .findOne({ where: { name: letter } })
     .then((adjective) => {
       res.status(206).json({
         status: "success",
