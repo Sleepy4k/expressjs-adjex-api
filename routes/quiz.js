@@ -1,3 +1,6 @@
+/**
+ * Module dependencies.
+ */
 const { jwt } = require("../middleware");
 const router = require("express").Router();
 const quizController = require("../controllers/quiz.controller");
