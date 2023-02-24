@@ -16,9 +16,9 @@ const config = require("../config/auth.config.js");
  * @return Array
  */
 exports.login = async (req, res, next) => {
-  const { userName, password } = req.body;
+  const { username, password } = req.body;
 
-  if (!userName && !password) {
+  if (!req.body.username || !req.body.password) {
     return res.status(422).json({
       status: "error",
       message: "Username and password are required",
@@ -29,7 +29,7 @@ exports.login = async (req, res, next) => {
   try {
     await models.user
       .findOne({
-        where: { userName: userName },
+        where: { userName: username },
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
@@ -47,14 +47,17 @@ exports.login = async (req, res, next) => {
 
         if (!passwordIsValid) {
           return res.status(401).send({
-            accessToken: null,
+            status: "error",
             message: "Invalid Password!",
+            data: {},
           });
         }
 
         const token = jwt.sign({ id: user.id }, config.secret, {
           expiresIn: 86400, // 24 hours
         });
+
+        req.session.token = token;
 
         res.status(200).json({
           status: "success",
@@ -91,7 +94,7 @@ exports.login = async (req, res, next) => {
 exports.register = async (req, res, next) => {
   const { firstName, lastName, userName, password } = req.body;
 
-  if (!firstName && !lastName && !userName && !password) {
+  if (!firstName || !lastName || !userName || !password) {
     return res.status(422).json({
       status: "error",
       message: "Firstname, lastname, username and password are required",
@@ -145,6 +148,34 @@ exports.register = async (req, res, next) => {
           data: error.message || {},
         });
       });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: error.message || {},
+    });
+  }
+};
+
+/**
+ * Handle user for logout.
+ *
+ * @param  Request  req
+ * @param  Response  res
+ * @param  Next  next
+ *
+ * @return Array
+ */
+exports.logout = async (req, res, next) => {
+  try {
+    req.session = null;
+
+    res.status(200).json({
+      status: "success",
+      message: "Logout successful",
+      data: {},
+      session: req.session,
+    });
   } catch (error) {
     res.status(500).json({
       status: "error",

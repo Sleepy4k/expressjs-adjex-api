@@ -1,3 +1,6 @@
+/**
+ * Module dependencies.
+ */
 const router = require("express").Router();
 const adjectiveController = require("../controllers/adjective.controller");
 

@@ -14,7 +14,7 @@ const config = require("../config/auth.config.js");
  * @return Array
  */
 exports.verifyToken = async (req, res, next) => {
-  let token = req.headers["x-access-token"];
+  let token = req.session.token;
 
   if (!token) {
     return res.status(403).json({

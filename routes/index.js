@@ -1,3 +1,6 @@
+/**
+ * Module dependencies.
+ */
 const router = require("express").Router();
 const name = require("../config/app.config").name;
 
