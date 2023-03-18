@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-const models = require("../models");
+import models from "../models/index.js";
 
 /**
  * Display a listing of the resource.
@@ -12,7 +12,7 @@ const models = require("../models");
  *
  * @return Array
  */
-exports.index = async (req, res, next) => {
+export async function index(req, res, next) {
   try {
     await models.quiz
       .findAll({
@@ -64,7 +64,7 @@ exports.index = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Store a newly created resource in storage.
@@ -75,9 +75,27 @@ exports.index = async (req, res, next) => {
  *
  * @return Array
  */
-exports.store = async (req, res, next) => {
+export async function store(req, res, next) {
   const { question, a, b, c, d, answer, categoryId, levelId, adjectiveId } =
     req.body;
+
+  if (
+    !question ||
+    !a ||
+    !b ||
+    !c ||
+    !d ||
+    !answer ||
+    !categoryId ||
+    !levelId ||
+    !adjectiveId
+  ) {
+    return res.status(422).json({
+      status: "error",
+      message: "Bad request",
+      data: {},
+    });
+  }
 
   try {
     await models.quiz
@@ -113,7 +131,7 @@ exports.store = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Display the specified resource.
@@ -124,7 +142,7 @@ exports.store = async (req, res, next) => {
  *
  * @return Array
  */
-exports.show = async (req, res, next) => {
+export async function show(req, res, next) {
   const id = req.params.id;
 
   try {
@@ -163,7 +181,7 @@ exports.show = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Update the specified resource in storage.
@@ -174,10 +192,28 @@ exports.show = async (req, res, next) => {
  *
  * @return Array
  */
-exports.update = async (req, res, next) => {
+export async function update(req, res, next) {
   const id = req.params.id;
   const { question, a, b, c, d, answer, categoryId, levelId, adjectiveId } =
     req.body;
+
+  if (
+    !question ||
+    !a ||
+    !b ||
+    !c ||
+    !d ||
+    !answer ||
+    !categoryId ||
+    !levelId ||
+    !adjectiveId
+  ) {
+    return res.status(422).json({
+      status: "error",
+      message: "Bad request",
+      data: {},
+    });
+  }
 
   try {
     await models.quiz
@@ -243,7 +279,7 @@ exports.update = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Remove the specified resource from storage.
@@ -254,7 +290,7 @@ exports.update = async (req, res, next) => {
  *
  * @return Array
  */
-exports.destroy = async (req, res, next) => {
+export async function destroy(req, res, next) {
   const id = req.params.id;
 
   try {
@@ -284,7 +320,7 @@ exports.destroy = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Display a listing of the resource with specified category.
@@ -295,7 +331,7 @@ exports.destroy = async (req, res, next) => {
  *
  * @return Array
  */
-exports.categoryId = async (req, res, next) => {
+export async function categoryId(req, res, next) {
   const id = req.params.id;
 
   try {
@@ -350,7 +386,7 @@ exports.categoryId = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Display a listing of the resource with specified level.
@@ -361,7 +397,7 @@ exports.categoryId = async (req, res, next) => {
  *
  * @return Array
  */
-exports.levelId = async (req, res, next) => {
+export async function levelId(req, res, next) {
   const id = req.params.id;
 
   try {
@@ -416,4 +452,6 @@ exports.levelId = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
+
+// Path: controllers\quiz.controller.js

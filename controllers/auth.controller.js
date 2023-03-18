@@ -1,10 +1,10 @@
 /**
  * Module dependencies.
  */
-const bcrypt = require("bcrypt");
-const models = require("../models");
-const jwt = require("jsonwebtoken");
-const config = require("../config/auth.config.js");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import models from "../models/index.js";
+import config from "../config/auth.config.js";
 
 /**
  * Handle user for login.
@@ -15,7 +15,7 @@ const config = require("../config/auth.config.js");
  *
  * @return Array
  */
-exports.login = async (req, res, next) => {
+export async function login(req, res, next) {
   const { username, password } = req.body;
 
   if (!req.body.username || !req.body.password) {
@@ -80,7 +80,7 @@ exports.login = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Handle user for register.
@@ -91,10 +91,10 @@ exports.login = async (req, res, next) => {
  *
  * @return Array
  */
-exports.register = async (req, res, next) => {
-  const { firstName, lastName, userName, password } = req.body;
+export async function register(req, res, next) {
+  const { firstname, lastname, username, password } = req.body;
 
-  if (!firstName || !lastName || !userName || !password) {
+  if (!firstname || !lastname || !username || !password) {
     return res.status(422).json({
       status: "error",
       message: "Firstname, lastname, username and password are required",
@@ -106,7 +106,7 @@ exports.register = async (req, res, next) => {
     await models.user
       .findOne({
         where: {
-          userName: userName,
+          userName: username,
         },
       })
       .then((user) => {
@@ -120,9 +120,9 @@ exports.register = async (req, res, next) => {
         } else {
           models.user
             .create({
-              firstName: firstName,
-              lastName: lastName,
-              userName: userName,
+              firstName: firstname,
+              lastName: lastname,
+              userName: username,
               password: bcrypt.hashSync(password, 10),
             })
             .then((user) => {
@@ -155,7 +155,7 @@ exports.register = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Handle user for logout.
@@ -166,7 +166,7 @@ exports.register = async (req, res, next) => {
  *
  * @return Array
  */
-exports.logout = async (req, res, next) => {
+export async function logout(req, res, next) {
   try {
     req.session = null;
 
@@ -183,4 +183,6 @@ exports.logout = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
+
+// Path: controllers\auth.controller.js

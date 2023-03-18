@@ -1,8 +1,8 @@
 /**
  * Module dependencies.
  */
-const models = require("../models");
-const url = require("../config/app.config").url;
+import models from "../models/index.js";
+import { url } from "../config/app.config.js";
 
 /**
  * Display a listing of the resource.
@@ -13,10 +13,10 @@ const url = require("../config/app.config").url;
  *
  * @return Array
  */
-exports.index = async (req, res, next) => {
-  var urlString = url + req.originalUrl;
-  var fixUrl = new URL(urlString);
-  var count = fixUrl.searchParams.get("count") || 25;
+export async function index(req, res, next) {
+  const urlString = url + req.originalUrl;
+  const fixUrl = new URL(urlString);
+  const count = fixUrl.searchParams.get("count") || 25;
 
   await models.adjective
     .findAll({ offset: 0, limit: Number(count) })
@@ -34,7 +34,7 @@ exports.index = async (req, res, next) => {
         data: error || {},
       });
     });
-};
+}
 
 /**
  * Display a specified resource.
@@ -45,8 +45,8 @@ exports.index = async (req, res, next) => {
  *
  * @return Array
  */
-exports.show = async (req, res, next) => {
-  var letter = req.params.letter;
+export async function show(req, res, next) {
+  const letter = req.params.letter;
 
   await models.adjective
     .findOne({ where: { name: letter } })
@@ -64,4 +64,6 @@ exports.show = async (req, res, next) => {
         data: error || {},
       });
     });
-};
+}
+
+// Path: controllers\adjective.controller.js

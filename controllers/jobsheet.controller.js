@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-const models = require("../models");
+import models from "../models/index.js";
 
 /**
  * Submit an answer to a question.
@@ -12,7 +12,7 @@ const models = require("../models");
  *
  * @return Array
  */
-exports.one = async (req, res, next) => {
+export async function one(req, res, next) {
   const { quizId, answer } = req.body;
 
   try {
@@ -47,7 +47,7 @@ exports.one = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
 
 /**
  * Send answers to many questions.
@@ -58,7 +58,7 @@ exports.one = async (req, res, next) => {
  *
  * @return Array
  */
-exports.many = async (req, res, next) => {
+export async function many(req, res, next) {
   const { quizId, answer } = req.body;
 
   try {
@@ -100,4 +100,6 @@ exports.many = async (req, res, next) => {
       data: error.message || {},
     });
   }
-};
+}
+
+// Path: controllers\jobsheet.controller.js
