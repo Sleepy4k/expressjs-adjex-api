@@ -1,8 +1,8 @@
 /**
  * Module dependencies.
  */
-const jwt = require("jsonwebtoken");
-const config = require("../config/auth.config.js");
+import jwt from "jsonwebtoken";
+import { secret } from "../config/auth.config.js";
 
 /**
  * Verify jwt token for validation.
@@ -13,8 +13,8 @@ const config = require("../config/auth.config.js");
  *
  * @return Array
  */
-exports.verifyToken = async (req, res, next) => {
-  let token = req.session.token;
+export async function verifyToken(req, res, next) {
+  const token = req.session.token;
 
   if (!token) {
     return res.status(403).json({
@@ -24,7 +24,7 @@ exports.verifyToken = async (req, res, next) => {
     });
   }
 
-  jwt.verify(token, config.secret, (err, decoded) => {
+  jwt.verify(token, secret, (err, decoded) => {
     if (err) {
       return res.status(401).json({
         status: "error",
@@ -35,4 +35,6 @@ exports.verifyToken = async (req, res, next) => {
     req.userId = decoded.id;
     next();
   });
-};
+}
+
+// Path: middlewares\jwt.middleware.js
