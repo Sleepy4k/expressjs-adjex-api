@@ -1,26 +1,57 @@
 {
   "name": "expressjs-adjex-api",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Express js api handler for Adjex project",
+  "main": "bin/www.js",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node bin/www.js",
+    "dev": "nodemon --exec babel-node bin/www.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "db:migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
+    "db:seed:all": "npx sequelize-cli db:seed:all",
+    "db:seed:undo:all": "npx sequelize-cli db:seed:undo:all"
   },
+  "author": "Benjamin4k",
+  "keywords": [
+    "api",
+    "adjex",
+    "express"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sleepy4k/expressjs-adjex-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sleepy4k/expressjs-adjex-api/issues"
+  },
+  "homepage": "https://github.com/Sleepy4k/expressjs-adjex-api#readme",
+  "type": "module",
   "dependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/register": "^7.21.0",
     "bcrypt": "^5.1.0",
     "cookie-session": "^2.0.0",
-    "debug": "~2.6.9",
+    "debug": "^4.3.4",
     "dotenv": "^16.0.3",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.0",
-    "morgan": "~1.9.1",
-    "mysql2": "^3.1.0",
-    "pug": "2.0.0-beta11",
-    "sequelize": "^6.28.0"
+    "morgan": "^1.10.0",
+    "mysql2": "^3.2.0",
+    "sequelize": "^6.29.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^2.0.21",
     "sequelize-cli": "^6.6.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }
