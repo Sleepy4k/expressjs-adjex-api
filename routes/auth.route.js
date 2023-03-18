@@ -3,7 +3,7 @@
  */
 import { Router } from "express";
 import { jwt } from "../middlewares/index.js";
-import authController from "../controllers/auth.controller.js";
+import { login, register, logout } from "../controllers/auth.controller.js";
 
 /*
  * Initialize router.
@@ -11,13 +11,13 @@ import authController from "../controllers/auth.controller.js";
 const router = Router();
 
 /* POST login listing. */
-router.post("/login", authController.login);
+router.post("/login", login);
 
 /* POST register listing. */
-router.post("/register", authController.register);
+router.post("/register", register);
 
 /* POST logout listing. */
-router.post("/logout", jwt.verifyToken, authController.logout);
+router.post("/logout", jwt.verifyToken, logout);
 
 export default router;
 

@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 import { Router } from "express";
-import adjectiveController from "../controllers/adjective.controller.js";
+import { index, show } from "../controllers/adjective.controller.js";
 
 /*
  * Initialize router.
@@ -10,10 +10,10 @@ import adjectiveController from "../controllers/adjective.controller.js";
 const router = Router();
 
 /* GET adjective listing. */
-router.get("/", adjectiveController.index);
+router.get("/", index);
 
 /* GET spesific adjective listing. */
-router.get("/:letter", adjectiveController.show);
+router.get("/:letter", show);
 
 export default router;
 

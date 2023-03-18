@@ -3,7 +3,15 @@
  */
 import { Router } from "express";
 import { jwt } from "../middlewares/index.js";
-import quizController from "../controllers/quiz.controller.js";
+import {
+  index,
+  store,
+  show,
+  update,
+  destroy,
+  categoryId,
+  levelId,
+} from "../controllers/quiz.controller.js";
 
 /*
  * Initialize router.
@@ -11,25 +19,25 @@ import quizController from "../controllers/quiz.controller.js";
 const router = Router();
 
 /* GET quiz listing. */
-router.get("/", quizController.index);
+router.get("/", index);
 
 /* POST quiz listing. */
-router.post("/", jwt.verifyToken, quizController.store);
+router.post("/", jwt.verifyToken, store);
 
 /* GET spesific quiz listing. */
-router.get("/:id", quizController.show);
+router.get("/:id", show);
 
 /* PUT spesific quiz listing. */
-router.put("/:id", jwt.verifyToken, quizController.update);
+router.put("/:id", jwt.verifyToken, update);
 
 /* DELETE spesific quiz listing. */
-router.delete("/:id", jwt.verifyToken, quizController.destroy);
+router.delete("/:id", jwt.verifyToken, destroy);
 
 /* GET quiz by spesific category listing. */
-router.get("/category/:id", quizController.categoryId);
+router.get("/category/:id", categoryId);
 
 /* GET quiz by spesific level listing. */
-router.get("/level/:id", quizController.levelId);
+router.get("/level/:id", levelId);
 
 export default router;
 
