@@ -1,9 +1,14 @@
 /**
  * Module dependencies.
  */
-const { jwt } = require("../middleware");
-const router = require("express").Router();
-const authController = require("../controllers/auth.controller");
+import { Router } from "express";
+import { jwt } from "../middlewares/index.js";
+import authController from "../controllers/auth.controller.js";
+
+/*
+ * Initialize router.
+ */
+const router = Router();
 
 /* POST login listing. */
 router.post("/login", authController.login);
@@ -14,4 +19,6 @@ router.post("/register", authController.register);
 /* POST logout listing. */
 router.post("/logout", jwt.verifyToken, authController.logout);
 
-module.exports = router;
+export default router;
+
+// Path: routes\auth.route.js

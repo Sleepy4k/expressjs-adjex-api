@@ -1,9 +1,14 @@
 /**
  * Module dependencies.
  */
-const { jwt } = require("../middleware");
-const router = require("express").Router();
-const quizController = require("../controllers/quiz.controller");
+import { Router } from "express";
+import { jwt } from "../middlewares/index.js";
+import quizController from "../controllers/quiz.controller.js";
+
+/*
+ * Initialize router.
+ */
+const router = Router();
 
 /* GET quiz listing. */
 router.get("/", quizController.index);
@@ -26,4 +31,6 @@ router.get("/category/:id", quizController.categoryId);
 /* GET quiz by spesific level listing. */
 router.get("/level/:id", quizController.levelId);
 
-module.exports = router;
+export default router;
+
+// Path: routes\quiz.route.js

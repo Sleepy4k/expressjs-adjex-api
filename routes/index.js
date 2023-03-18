@@ -1,24 +1,41 @@
 /**
  * Module dependencies.
  */
-const router = require("express").Router();
-const name = require("../config/app.config").name;
+import { Router } from "express";
+
+/*
+ * Import routes.
+ */
+import auth from "./auth.route.js";
+import quiz from "./quiz.route.js";
+import jobsheet from "./jobsheet.route.js";
+import adjective from "./adjective.route.js";
+
+/*
+ * Initialize router.
+ */
+const router = Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: name });
+  res.status(200).send({
+    status: "success",
+    message: "Welcome to the API",
+  });
 });
 
 /* RESOURCE quiz. */
-router.use("/api/auth", require("./auth"));
+router.use("/api/auth", auth);
 
 /* RESOURCE quiz. */
-router.use("/api/quiz", require("./quiz"));
+router.use("/api/quiz", quiz);
 
 /* RESOURCE jobsheet. */
-router.use("/api/jobsheet", require("./jobsheet"));
+router.use("/api/jobsheet", jobsheet);
 
 /* RESOURCE adjective. */
-router.use("/api/adjective", require("./adjective"));
+router.use("/api/adjective", adjective);
 
-module.exports = router;
+export default router;
+
+// Path: routes\index.js
