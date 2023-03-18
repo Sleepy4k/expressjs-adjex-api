@@ -4,7 +4,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import models from "../models/index.js";
-import config from "../config/auth.config.js";
+import { secret } from "../config/auth.config.js";
 
 /**
  * Handle user for login.
@@ -53,7 +53,7 @@ export async function login(req, res, next) {
           });
         }
 
-        const token = jwt.sign({ id: user.id }, config.secret, {
+        const token = jwt.sign({ id: user.id }, secret, {
           expiresIn: 86400, // 24 hours
         });
 
