@@ -1,6 +1,6 @@
-require("dotenv").config();
+import "dotenv/config.js";
 
-module.exports = {
-  secret: process.env.JWT_TOKEN_SECRET || "secret",
-  expiresIn: process.env.JWT_TOKEN_EXPIRES_IN || "1d",
-};
+export const secret = process.env.JWT_TOKEN_SECRET || "secret";
+export const expiresIn = process.env.JWT_TOKEN_EXPIRES_IN || "1d";
+
+// Path: config\auth.config.js

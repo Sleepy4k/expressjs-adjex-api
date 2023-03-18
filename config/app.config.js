@@ -1,8 +1,8 @@
-require("dotenv").config();
+import "dotenv/config.js";
 
-module.exports = {
-  name: process.env.APP_NAME || "Express JS",
-  env: process.env.APP_ENV || "development",
-  port: process.env.APP_PORT || "3000",
-  url: process.env.APP_URL || "http://localhost:3000",
-};
+export const name = process.env.APP_NAME || "Express JS";
+export const env = process.env.APP_ENV || "development";
+export const port = process.env.APP_PORT || "3000";
+export const url = process.env.APP_URL || "http://localhost:3000";
+
+// Path: config\app.config.js
