@@ -6,20 +6,14 @@ import "dotenv/config.js";
 /**
  * Module dependencies.
  */
-import fs from "fs";
-import path, { dirname } from "path";
 import Sequelize from "sequelize";
-import { fileURLToPath } from "url";
 import { env } from "../config/app.config.js";
-import { development, test, production } from "../config/database.config.cjs";
+import database from "../config/database.config.cjs";
 
 /**
- * Setup path.
+ * Define database connection.
  */
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const basename = path.basename(__filename);
+const { development, test, production } = database;
 
 /**
  * Define model list.
