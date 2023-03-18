@@ -29,6 +29,10 @@ Jalankan file server.js
 
     npm start
 
+### Note
+
+    Project ini dibuat dengan ES6
+
 ## EN
 
 ### Understanding
@@ -57,3 +61,7 @@ if you have done the migration then we enter the initial data
 Run the main.py file
 
     npm start
+
+### Note
+
+    This project built with ES6
