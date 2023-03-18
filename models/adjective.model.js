@@ -1,13 +1,12 @@
-"use strict";
+import { Model } from "sequelize";
 
-const { Model } = require("sequelize");
-
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   class Adjective extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
+     * @param {object} models
      */
     static associate(models) {
       Adjective.hasMany(models.quiz, {
@@ -39,3 +38,5 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Adjective;
 };
+
+// Path: models\adjective.model.js
