@@ -1,8 +1,6 @@
-"use strict";
+import { faker } from "@faker-js/faker";
 
-const { faker } = require("@faker-js/faker");
-
-module.exports = {
+export default {
   up() {
     const levels = [...Array(3)].map((_) => ({
       name: faker.name.firstName(),
@@ -16,3 +14,5 @@ module.exports = {
     return null;
   },
 };
+
+// Path: database\factories\20230208010200-seed-levels.cjs

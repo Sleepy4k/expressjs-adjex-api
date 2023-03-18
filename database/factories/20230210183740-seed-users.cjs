@@ -1,11 +1,9 @@
-"use strict";
+import bcrypt from "bcrypt";
+import { faker } from "@faker-js/faker";
 
-const bcrypt = require("bcrypt");
-const { faker } = require("@faker-js/faker");
-
-module.exports = {
+export default {
   up() {
-    const categories = [...Array(3)].map((_) => ({
+    const users = [...Array(3)].map((_) => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       userName: faker.internet.userName(),
@@ -13,10 +11,12 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     }));
-    return categories;
+    return users;
   },
 
   down() {
     return null;
   },
 };
+
+// Path: database\factories\20230210183740-seed-users.cjs

@@ -1,20 +1,20 @@
-"use strict";
+import { faker } from "@faker-js/faker";
 
-const { faker } = require("@faker-js/faker");
-
-module.exports = {
+export default {
   up() {
-    const categories = [...Array(3)].map((_) => ({
+    const adjectives = [...Array(3)].map((_) => ({
       name: faker.name.firstName(),
       description: faker.lorem.paragraph(),
       example: faker.lorem.paragraph(),
       createdAt: new Date(),
       updatedAt: new Date(),
     }));
-    return categories;
+    return adjectives;
   },
 
   down() {
     return null;
   },
 };
+
+// Path: database\factories\20230210183734-seed-adjectives.cjs

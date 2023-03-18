@@ -1,8 +1,6 @@
-"use strict";
+import { faker } from "@faker-js/faker";
 
-const { faker } = require("@faker-js/faker");
-
-module.exports = {
+export default {
   up() {
     const quizzes = [...Array(3)].map((_) => ({
       question: faker.random.words(5) + "?",
@@ -24,3 +22,5 @@ module.exports = {
     return null;
   },
 };
+
+// Path: database\factories\20230208010223-seed-quizzes.cjs
