@@ -1,9 +1,6 @@
-"use strict";
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("levels", {
+export default {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("categories", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -25,7 +22,9 @@ module.exports = {
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("levels");
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("categories");
   },
 };
+
+// Path: database\migrations\20230205153811-create-categories.cjs

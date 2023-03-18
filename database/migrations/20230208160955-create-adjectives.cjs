@@ -1,44 +1,38 @@
-"use strict";
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+export default {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("adjectives", {
       id: {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      lastName: {
+      description: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      userName: {
-        unique: true,
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      password: {
+      example: {
         allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
       },
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("adjectives");
   },
 };
+
+// Path: database\migrations\20230208160955-create-adjectives.cjs

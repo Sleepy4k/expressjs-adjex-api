@@ -1,25 +1,26 @@
-"use strict";
-
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("adjectives", {
+export default {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("users", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      firstName: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      lastName: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      userName: {
         unique: true,
         allowNull: false,
         type: Sequelize.STRING,
       },
-      description: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      example: {
+      password: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -33,7 +34,10 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("adjectives");
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("users");
   },
 };
+
+// Path: database\migrations\20230208160601-create-users.cjs
