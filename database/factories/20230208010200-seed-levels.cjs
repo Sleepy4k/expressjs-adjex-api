@@ -1,18 +1,21 @@
 import { faker } from "@faker-js/faker";
 
-export default {
-  up() {
-    const levels = [...Array(3)].map((_) => ({
+export function up() {
+  let levels = [];
+
+  for (let i = 0; i < 3; i++) {
+    levels.push({
       name: faker.name.firstName(),
       createdAt: new Date(),
       updatedAt: new Date(),
-    }));
-    return levels;
-  },
+    });
+  }
 
-  down() {
-    return null;
-  },
-};
+  return levels;
+}
+
+export function down() {
+  return null;
+}
 
 // Path: database\factories\20230208010200-seed-levels.cjs

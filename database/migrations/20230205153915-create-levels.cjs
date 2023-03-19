@@ -1,6 +1,6 @@
 export default {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("categories", {
+    await queryInterface.createTable("levels", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -23,7 +23,7 @@ export default {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("categories");
+    await queryInterface.dropTable("levels");
   },
 };
 
