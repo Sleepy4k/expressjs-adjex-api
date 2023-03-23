@@ -25,7 +25,7 @@ jika sudah melakukan migration lalu kita masukan data awal
 
     npm run db:seed:all
 
-Jalankan file server.js
+Jalankan server
 
     npm start
 
@@ -46,7 +46,7 @@ Jalankan file server.js
 
 ### Instalation
 
-Make sure you have installed Python with version >= 3.1
+Make sure you have installed node js with version >= 18 and above
 
     npm install
 
@@ -58,7 +58,7 @@ if you have done the migration then we enter the initial data
 
     npm run db:seed:all
 
-Run the main.py file
+Run servers
 
     npm start
 
