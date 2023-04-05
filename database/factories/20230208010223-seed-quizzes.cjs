@@ -6,7 +6,7 @@ export function up() {
   const randomNumber = (min, max) =>
     Math.floor(Math.random() * (max - min + 1)) + min;
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     quizzes.push({
       question: faker.random.words(5) + "?",
       a: faker.random.word(),
