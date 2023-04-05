@@ -21,6 +21,7 @@ const { development, test, production } = database;
 import User from "./user.model.js";
 import Quiz from "./quiz.model.js";
 import Level from "./level.model.js";
+import Report from "./report.model.js";
 import Category from "./category.model.js";
 import Adjective from "./adjective.model.js";
 
@@ -61,6 +62,7 @@ const db = {};
 db.user = User(sequelize, Sequelize.DataTypes);
 db.quiz = Quiz(sequelize, Sequelize.DataTypes);
 db.level = Level(sequelize, Sequelize.DataTypes);
+db.report = Report(sequelize, Sequelize.DataTypes);
 db.category = Category(sequelize, Sequelize.DataTypes);
 db.adjective = Adjective(sequelize, Sequelize.DataTypes);
 
@@ -70,6 +72,7 @@ db.adjective = Adjective(sequelize, Sequelize.DataTypes);
 db.user.associate(db);
 db.quiz.associate(db);
 db.level.associate(db);
+db.report.associate(db);
 db.category.associate(db);
 db.adjective.associate(db);
 
